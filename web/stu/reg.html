@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生注册</title>
+    <link rel="stylesheet" type="text/css" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <script src="../js/vue.js"></script>
+    <script src="../js/axios.min.js" ></script>
+</head>
+<body>
+<div class="container" id="app">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>学生注册</h3>
+            <form class="form">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" v-model="user.name"  name="name" />
+                </div>
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" class="form-control" v-model="user.username" name="username" />
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="text" class="form-control" v-model="user.password" name="password" />
+                </div>
+                <div class="form-group">
+                    <button type="button" v-on:click="doreg()" class="btn btn-primary">注册</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    var vue=new Vue({
+        el:'#app',
+        data:{
+            msg:'hello ',
+            user:{
+                name:'',
+                username:'',
+                password:''
+            }
+        },
+        methods:{
+            doreg:function(){
+                console.log(this.user)
+                // 调用ajax操作
+                url='/web01/studentadd'
+                axios.post(url,this.user).then(function(result){
+
+                }).catch(function(err){
+                    console.log(err)
+                   alert('操作异常，请查看日志')
+                });
+            }
+        },
+        mounted:function(){
+            console.log('inited')
+        }
+    });
+</script>
+</body>
+</html>
